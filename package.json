@@ -1,0 +1,39 @@
+{
+  "name": "vue-project",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "start": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preserve": "vite build",
+    "serve": "vite preview --port 5050",
+    "typecheck": "vue-tsc --noEmit",
+    "lint": "eslint --ext .ts,.vue src && stylelint **/*.vue",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.5.5",
+    "@vue/apollo-composable": "^4.0.0-alpha.16",
+    "@vue/apollo-util": "^4.0.0-alpha.16",
+    "graphql": "^16.0.1",
+    "lodash": "^4.17.21",
+    "vue": "^3.2.14",
+    "vue-styled-components": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.177",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@vitejs/plugin-vue": "^1.9.3",
+    "eslint": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.1.1",
+    "husky": "^7.0.4",
+    "prettier": "^2.4.1",
+    "sass": "^1.44.0",
+    "stylelint": "^14.1.0",
+    "stylelint-config-recommended-vue": "^1.0.0",
+    "typescript": "~4.3.5",
+    "vite": "^2.6.3",
+    "vue-tsc": "^0.3.0"
+  }
+}
