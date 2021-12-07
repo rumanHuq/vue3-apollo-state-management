@@ -1,6 +1,6 @@
 import { InMemoryCache, FieldPolicy, DocumentNode, gql } from "@apollo/client/core"
 import { useQuery } from "@vue/apollo-composable"
-import { cloneDeep, isNumber, isObject } from "lodash";
+import { cloneDeep, isArray, isNumber, isObject } from "lodash";
 import { Ref } from "vue";
 
 interface Todo {
@@ -55,53 +55,43 @@ const mutations: { [key in CacheKeys]: <T extends unknown = undefined>(prop: { t
   title(prop) {
     const { payload, type } = prop
     const query = queries.title
-    switch (type) {
-      case "replaceWith": {
-        cache.updateQuery<Cache>({ query }, (data) => {
-          if (!data || typeof payload !== 'string') return data
-          const cloned = cloneDeep(data)
+    cache.updateQuery<Cache>({ query }, (data) => {
+      if (!data) return data
+      const cloned = cloneDeep(data)
+      switch (type) {
+        case "replaceWith": {
+          if (typeof payload !== 'string') return data
           cloned.title = payload
           return cloned
-        })
-        break;
-      }
-      case "toUpper": {
-        cache.updateQuery<Cache>({ query }, (data) => {
-          if (!data) return data
-          const cloned = cloneDeep(data)
+        }
+        case "toUpper": {
           cloned.title = cloned.title.toUpperCase()
           return cloned
-        })
-        break;
+        }
+        default: return cloned
       }
-      default: return
-    }
+    })
   },
   todos(prop) {
     const { payload, type } = prop
     const query = queries.todos
-
-    switch (type) {
-      case "add": {
-        cache.updateQuery<Cache>({ query }, (data) => {
-          if (!data || !isObject(payload)) return data
-          const cloned = cloneDeep(data)
+    cache.updateQuery<Cache>({ query }, (data) => {
+      if (!data) return data
+      const cloned = cloneDeep(data)
+      switch (type) {
+        case "add": {
+          if (isArray(payload) && !isObject(payload)) return cloned
           cloned.todos.push(payload as unknown as Cache['todos'][number])
           return cloned
-        })
-        break;
-      }
-      case "remove": {
-        cache.updateQuery<Cache>({ query }, (data) => {
-          if (!data || !isNumber(payload)) return data
-          const cloned = cloneDeep(data)
+        }
+        case "remove": {
+          if (!isNumber(payload)) return cloned
           cloned.todos = cloned.todos.filter(todo => todo.id !== payload)
           return cloned
-        })
-        break;
+        }
+        default: return cloned
       }
-      default: return
-    }
+    })
   },
 }
 
