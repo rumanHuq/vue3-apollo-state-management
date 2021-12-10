@@ -6,14 +6,30 @@ module.exports = {
   parserOptions: {
     parser: "@typescript-eslint/parser",
   },
-  plugins: ["@typescript-eslint", "prettier"],
+  plugins: ["@typescript-eslint"],
   extends: [
     "plugin:@typescript-eslint/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
     // https://github.com/vuejs/eslint-plugin-vue/blob/44ff0e02cd0fd08b8cd7dee0127dbb5590446323/docs/user-guide/README.md#conflict-with-prettier
     "plugin:vue/vue3-recommended",
-    "prettier",
+    "plugin:prettier/recommended",
   ],
   rules: {
     "prettier/prettier": "warn",
+    "import/order": [
+      "error",
+      {
+        alphabetize: { order: "asc", caseInsensitive: false },
+        pathGroups: [
+          {
+            pattern: "@/**",
+            group: "external",
+            position: "after",
+          },
+        ],
+        pathGroupsExcludedImportTypes: ["builtin"],
+      },
+    ],
   },
 };

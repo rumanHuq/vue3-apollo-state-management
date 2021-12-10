@@ -1,0 +1,24 @@
+overwrite: true
+documentMode: external
+schema:
+  - 'https://dex-server.herokuapp.com/'
+documents: './src/apollo/typeDefs/**/*.ts'
+generates:
+  src/Interfaces/gql-definitions.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'fragment-matcher'
+  ./schema.json:
+    plugins:
+      - 'introspection'
+config:
+  exportFragmentSpreadSubTypes: true
+  namingConvention:
+    enumValues: keep
+  withHooks: true
+  withResultType: true
+  preResolveTypes: true
+  declarationKind:
+    type: 'interface'
+    input: 'interface'
