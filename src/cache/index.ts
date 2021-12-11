@@ -2,6 +2,7 @@ import { InMemoryCache, FieldPolicy, DocumentNode, gql } from "@apollo/client/co
 import { useQuery } from "@vue/apollo-composable";
 import Joi, { ValidationResult } from "joi";
 import cloneDeep from "lodash/cloneDeep";
+import isNil from "lodash/isNil";
 import { Ref } from "vue";
 
 interface Todo {
@@ -9,6 +10,16 @@ interface Todo {
   id: number;
   title: string;
 }
+
+type CacheKeys = keyof Cache;
+type QueryFn<T> = FieldPolicy<T, T>;
+type MutationTypes = {
+  todos: "add" | "remove";
+  title: "replaceWith" | "toUpper";
+};
+type Mutations = {
+  [key in CacheKeys]: <T = unknown>(action: { actionType: MutationTypes[key]; payload?: T }) => void;
+};
 
 export interface Cache {
   todos: Todo[];
@@ -21,12 +32,6 @@ const TodoSchema = Joi.object<Todo>({
   title: Joi.string().required(),
 }).required();
 
-type CacheKeys = keyof Cache;
-type QueryFn<T> = FieldPolicy<T, T>;
-type MutationTypes = {
-  todos: "add" | "remove";
-  title: "replaceWith" | "toUpper";
-};
 const queries: { [key in CacheKeys]: DocumentNode } = {
   todos: gql`
     query getTodos {
@@ -40,7 +45,7 @@ const queries: { [key in CacheKeys]: DocumentNode } = {
   `,
 };
 
-const initialCache: { [key in CacheKeys]: QueryFn<Readonly<Cache[key]>> } = {
+const fields: { [key in CacheKeys]: QueryFn<Readonly<Cache[key]>> } = {
   todos: {
     read(val) {
       return val ?? [];
@@ -53,37 +58,36 @@ const initialCache: { [key in CacheKeys]: QueryFn<Readonly<Cache[key]>> } = {
   },
 };
 
-const mutations: {
-  [key in CacheKeys]: <T = undefined>(prop: { type: MutationTypes[key]; payload?: T }) => void;
-} = {
+const mutations: Mutations = {
   title(prop) {
-    const { payload, type } = prop;
+    const { payload, actionType } = prop;
     const query = queries.title;
     cache.updateQuery<Cache>({ query }, (data) => {
       if (!data) return data;
       const cache = cloneDeep(data);
-      switch (type) {
+      switch (actionType) {
         case "replaceWith": {
           if (typeof payload !== "string") return data;
           cache.title = payload;
-          return cache;
+          break;
         }
         case "toUpper": {
           cache.title = cache.title.toUpperCase();
-          return cache;
+          break;
         }
         default:
-          return cache;
+          break;
       }
+      return cache;
     });
   },
   todos(prop) {
-    const { payload, type } = prop;
+    const { payload, actionType } = prop;
     const query = queries.todos;
     cache.updateQuery<Cache>({ query }, (data) => {
       if (!data) return data;
       const cache = cloneDeep(data);
-      switch (type) {
+      switch (actionType) {
         case "add": {
           const { error, value } = TodoSchema.validate(payload);
           if (error) throw error;
@@ -94,7 +98,6 @@ const mutations: {
         case "remove": {
           const { error, value }: ValidationResult<number> = Joi.number().required().validate(payload);
           if (error) throw error;
-          if (!value) return cache;
 
           cache.todos = cache.todos.filter((todo) => todo.id !== value);
           return cache;
@@ -107,17 +110,17 @@ const mutations: {
 };
 
 export const cache = new InMemoryCache({
-  typePolicies: { Query: { fields: initialCache } },
+  typePolicies: { Query: { fields } },
 });
 
 export function useCache<CacheKey extends CacheKeys>(cacheKey: CacheKey) {
+  type ApolloResult = Record<CacheKey, Cache[CacheKey]>;
   const query = queries[cacheKey];
-  const { result } = useQuery<Record<CacheKey, Cache[CacheKey]>>(query, {
+  const { result } = useQuery<ApolloResult>(query, {
     fetchPolicy: "cache-only",
   });
-  if (!result.value) {
+  if (isNil(result?.value)) {
     throw new Error("Client query failed, make sure query has correct params");
   }
-  type ApolloResult = Ref<Record<CacheKey, Cache[CacheKey]>>;
-  return [result as ApolloResult, mutations[cacheKey]] as const;
+  return [result as Ref<ApolloResult>, mutations[cacheKey]] as const;
 }
