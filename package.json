@@ -12,11 +12,15 @@
     "lint": "eslint --ext .ts,.vue src && stylelint **/*.vue",
     "prepare": "husky install"
   },
+  "resolutions": {
+    "graphql": "^16.1.0"
+  },
   "dependencies": {
     "@apollo/client": "^3.5.5",
+    "@graphql-codegen/typescript-apollo-client-helpers": "^2.1.8",
     "@vue/apollo-composable": "^4.0.0-alpha.16",
     "@vue/apollo-util": "^4.0.0-alpha.16",
-    "graphql": "^16.0.1",
+    "graphql": "^15.5.3",
     "joi": "^17.5.0",
     "lodash": "^4.17.21",
     "vue": "^3.2.14",

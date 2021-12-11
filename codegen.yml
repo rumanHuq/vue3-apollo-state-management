@@ -9,6 +9,10 @@ generates:
       - 'typescript'
       - 'typescript-operations'
       - 'fragment-matcher'
+      - 'typescript-apollo-client-helpers':
+          useTypeImports: true
+          requireKeyFields: false
+          requirePoliciesForAllTypes: true
   ./schema.json:
     plugins:
       - 'introspection'
@@ -22,3 +26,4 @@ config:
   declarationKind:
     type: 'interface'
     input: 'interface'
+

@@ -5,6 +5,8 @@ module.exports = {
   parser: "vue-eslint-parser",
   parserOptions: {
     parser: "@typescript-eslint/parser",
+    project: "./tsconfig.json",
+    extraFileExtensions: [".vue"],
   },
   plugins: ["@typescript-eslint"],
   extends: [
@@ -17,6 +19,8 @@ module.exports = {
   ],
   rules: {
     "prettier/prettier": "warn",
+    "import/no-unresolved": "off" /* typescript handles all the import validity */,
+    "@typescript-eslint/no-unused-vars": "off" /* typescript handles all the import validity */,
     "import/order": [
       "error",
       {

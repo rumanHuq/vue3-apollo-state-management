@@ -1,3 +1,4 @@
+import type { FieldPolicy, FieldReadFunction, TypePolicies, TypePolicy } from '@apollo/client/cache';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -385,3 +386,275 @@ export type GetAllPokemonQuery = { __typename?: 'Query', allPokemon?: Array<{ __
 };
       export default result;
     
+export type AbilityKeySpecifier = ('description' | 'effect' | 'id' | 'is_hidden' | 'name' | 'pokemon' | AbilityKeySpecifier)[];
+export type AbilityFieldPolicy = {
+	description?: FieldPolicy<any> | FieldReadFunction<any>,
+	effect?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	is_hidden?: FieldPolicy<any> | FieldReadFunction<any>,
+	name?: FieldPolicy<any> | FieldReadFunction<any>,
+	pokemon?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type DexEntryKeySpecifier = ('description' | 'game' | DexEntryKeySpecifier)[];
+export type DexEntryFieldPolicy = {
+	description?: FieldPolicy<any> | FieldReadFunction<any>,
+	game?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type Dominant_ColorKeySpecifier = ('b' | 'dark' | 'g' | 'light' | 'original' | 'r' | Dominant_ColorKeySpecifier)[];
+export type Dominant_ColorFieldPolicy = {
+	b?: FieldPolicy<any> | FieldReadFunction<any>,
+	dark?: FieldPolicy<any> | FieldReadFunction<any>,
+	g?: FieldPolicy<any> | FieldReadFunction<any>,
+	light?: FieldPolicy<any> | FieldReadFunction<any>,
+	original?: FieldPolicy<any> | FieldReadFunction<any>,
+	r?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type EggGroupKeySpecifier = ('id' | 'name' | 'pokemon' | EggGroupKeySpecifier)[];
+export type EggGroupFieldPolicy = {
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	name?: FieldPolicy<any> | FieldReadFunction<any>,
+	pokemon?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type GameKeySpecifier = ('generation' | 'id' | 'name' | 'regions' | GameKeySpecifier)[];
+export type GameFieldPolicy = {
+	generation?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	name?: FieldPolicy<any> | FieldReadFunction<any>,
+	regions?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type GenderKeySpecifier = ('id' | 'name' | GenderKeySpecifier)[];
+export type GenderFieldPolicy = {
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	name?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type ItemKeySpecifier = ('bag_pocket' | 'cost' | 'description' | 'effect' | 'id' | 'name' | 'sprite' | ItemKeySpecifier)[];
+export type ItemFieldPolicy = {
+	bag_pocket?: FieldPolicy<any> | FieldReadFunction<any>,
+	cost?: FieldPolicy<any> | FieldReadFunction<any>,
+	description?: FieldPolicy<any> | FieldReadFunction<any>,
+	effect?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	name?: FieldPolicy<any> | FieldReadFunction<any>,
+	sprite?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type LocationKeySpecifier = ('games' | 'id' | 'name' | 'pokemon' | 'region' | LocationKeySpecifier)[];
+export type LocationFieldPolicy = {
+	games?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	name?: FieldPolicy<any> | FieldReadFunction<any>,
+	pokemon?: FieldPolicy<any> | FieldReadFunction<any>,
+	region?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type MoveKeySpecifier = ('accuracy' | 'ailment' | 'damage_class' | 'description' | 'effect' | 'effect_chance' | 'id' | 'learn_methods' | 'name' | 'original_games' | 'power' | 'pp' | 'priority' | 'type' | MoveKeySpecifier)[];
+export type MoveFieldPolicy = {
+	accuracy?: FieldPolicy<any> | FieldReadFunction<any>,
+	ailment?: FieldPolicy<any> | FieldReadFunction<any>,
+	damage_class?: FieldPolicy<any> | FieldReadFunction<any>,
+	description?: FieldPolicy<any> | FieldReadFunction<any>,
+	effect?: FieldPolicy<any> | FieldReadFunction<any>,
+	effect_chance?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	learn_methods?: FieldPolicy<any> | FieldReadFunction<any>,
+	name?: FieldPolicy<any> | FieldReadFunction<any>,
+	original_games?: FieldPolicy<any> | FieldReadFunction<any>,
+	power?: FieldPolicy<any> | FieldReadFunction<any>,
+	pp?: FieldPolicy<any> | FieldReadFunction<any>,
+	priority?: FieldPolicy<any> | FieldReadFunction<any>,
+	type?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type MoveDescriptionKeySpecifier = ('description' | 'games' | MoveDescriptionKeySpecifier)[];
+export type MoveDescriptionFieldPolicy = {
+	description?: FieldPolicy<any> | FieldReadFunction<any>,
+	games?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type MoveLearnMethodKeySpecifier = ('games' | 'level_learned_at' | 'method' | MoveLearnMethodKeySpecifier)[];
+export type MoveLearnMethodFieldPolicy = {
+	games?: FieldPolicy<any> | FieldReadFunction<any>,
+	level_learned_at?: FieldPolicy<any> | FieldReadFunction<any>,
+	method?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type NameAndIdKeySpecifier = ('id' | 'name' | NameAndIdKeySpecifier)[];
+export type NameAndIdFieldPolicy = {
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	name?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type OtherEvolutionCriteriaKeySpecifier = ('evolution_criteria_name' | 'value' | OtherEvolutionCriteriaKeySpecifier)[];
+export type OtherEvolutionCriteriaFieldPolicy = {
+	evolution_criteria_name?: FieldPolicy<any> | FieldReadFunction<any>,
+	value?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type PokemonKeySpecifier = ('abilities' | 'base_experience' | 'base_happiness' | 'base_stats' | 'capture_rate' | 'color' | 'dominant_color' | 'egg_groups' | 'evolution_chain_start' | 'evolution_criteria' | 'evolution_trigger' | 'evolves_from' | 'evolves_to' | 'games' | 'gender_rate' | 'generation' | 'genus' | 'growth_rate' | 'hatch_counter' | 'height' | 'id' | 'is_baby' | 'is_default' | 'locations' | 'moves' | 'name' | 'nat_dex_num' | 'pokedex_entries' | 'shape' | 'sprites' | 'types' | 'variants' | 'weight' | PokemonKeySpecifier)[];
+export type PokemonFieldPolicy = {
+	abilities?: FieldPolicy<any> | FieldReadFunction<any>,
+	base_experience?: FieldPolicy<any> | FieldReadFunction<any>,
+	base_happiness?: FieldPolicy<any> | FieldReadFunction<any>,
+	base_stats?: FieldPolicy<any> | FieldReadFunction<any>,
+	capture_rate?: FieldPolicy<any> | FieldReadFunction<any>,
+	color?: FieldPolicy<any> | FieldReadFunction<any>,
+	dominant_color?: FieldPolicy<any> | FieldReadFunction<any>,
+	egg_groups?: FieldPolicy<any> | FieldReadFunction<any>,
+	evolution_chain_start?: FieldPolicy<any> | FieldReadFunction<any>,
+	evolution_criteria?: FieldPolicy<any> | FieldReadFunction<any>,
+	evolution_trigger?: FieldPolicy<any> | FieldReadFunction<any>,
+	evolves_from?: FieldPolicy<any> | FieldReadFunction<any>,
+	evolves_to?: FieldPolicy<any> | FieldReadFunction<any>,
+	games?: FieldPolicy<any> | FieldReadFunction<any>,
+	gender_rate?: FieldPolicy<any> | FieldReadFunction<any>,
+	generation?: FieldPolicy<any> | FieldReadFunction<any>,
+	genus?: FieldPolicy<any> | FieldReadFunction<any>,
+	growth_rate?: FieldPolicy<any> | FieldReadFunction<any>,
+	hatch_counter?: FieldPolicy<any> | FieldReadFunction<any>,
+	height?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	is_baby?: FieldPolicy<any> | FieldReadFunction<any>,
+	is_default?: FieldPolicy<any> | FieldReadFunction<any>,
+	locations?: FieldPolicy<any> | FieldReadFunction<any>,
+	moves?: FieldPolicy<any> | FieldReadFunction<any>,
+	name?: FieldPolicy<any> | FieldReadFunction<any>,
+	nat_dex_num?: FieldPolicy<any> | FieldReadFunction<any>,
+	pokedex_entries?: FieldPolicy<any> | FieldReadFunction<any>,
+	shape?: FieldPolicy<any> | FieldReadFunction<any>,
+	sprites?: FieldPolicy<any> | FieldReadFunction<any>,
+	types?: FieldPolicy<any> | FieldReadFunction<any>,
+	variants?: FieldPolicy<any> | FieldReadFunction<any>,
+	weight?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type QueryKeySpecifier = ('ability' | 'allAbilities' | 'allEggGroups' | 'allGames' | 'allItems' | 'allLocations' | 'allMoves' | 'allPokemon' | 'allRegions' | 'allTypes' | 'eggGroup' | 'game' | 'item' | 'location' | 'move' | 'pokemon' | 'region' | 'type' | QueryKeySpecifier)[];
+export type QueryFieldPolicy = {
+	ability?: FieldPolicy<any> | FieldReadFunction<any>,
+	allAbilities?: FieldPolicy<any> | FieldReadFunction<any>,
+	allEggGroups?: FieldPolicy<any> | FieldReadFunction<any>,
+	allGames?: FieldPolicy<any> | FieldReadFunction<any>,
+	allItems?: FieldPolicy<any> | FieldReadFunction<any>,
+	allLocations?: FieldPolicy<any> | FieldReadFunction<any>,
+	allMoves?: FieldPolicy<any> | FieldReadFunction<any>,
+	allPokemon?: FieldPolicy<any> | FieldReadFunction<any>,
+	allRegions?: FieldPolicy<any> | FieldReadFunction<any>,
+	allTypes?: FieldPolicy<any> | FieldReadFunction<any>,
+	eggGroup?: FieldPolicy<any> | FieldReadFunction<any>,
+	game?: FieldPolicy<any> | FieldReadFunction<any>,
+	item?: FieldPolicy<any> | FieldReadFunction<any>,
+	location?: FieldPolicy<any> | FieldReadFunction<any>,
+	move?: FieldPolicy<any> | FieldReadFunction<any>,
+	pokemon?: FieldPolicy<any> | FieldReadFunction<any>,
+	region?: FieldPolicy<any> | FieldReadFunction<any>,
+	type?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type RegionKeySpecifier = ('games' | 'id' | 'locations' | 'name' | RegionKeySpecifier)[];
+export type RegionFieldPolicy = {
+	games?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	locations?: FieldPolicy<any> | FieldReadFunction<any>,
+	name?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type SpritesKeySpecifier = ('back_default' | 'back_female' | 'back_shiny' | 'back_shiny_female' | 'front_default' | 'front_female' | 'front_shiny' | 'front_shiny_female' | SpritesKeySpecifier)[];
+export type SpritesFieldPolicy = {
+	back_default?: FieldPolicy<any> | FieldReadFunction<any>,
+	back_female?: FieldPolicy<any> | FieldReadFunction<any>,
+	back_shiny?: FieldPolicy<any> | FieldReadFunction<any>,
+	back_shiny_female?: FieldPolicy<any> | FieldReadFunction<any>,
+	front_default?: FieldPolicy<any> | FieldReadFunction<any>,
+	front_female?: FieldPolicy<any> | FieldReadFunction<any>,
+	front_shiny?: FieldPolicy<any> | FieldReadFunction<any>,
+	front_shiny_female?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type StatsKeySpecifier = ('attack' | 'defense' | 'hp' | 'special_attack' | 'special_defense' | 'speed' | StatsKeySpecifier)[];
+export type StatsFieldPolicy = {
+	attack?: FieldPolicy<any> | FieldReadFunction<any>,
+	defense?: FieldPolicy<any> | FieldReadFunction<any>,
+	hp?: FieldPolicy<any> | FieldReadFunction<any>,
+	special_attack?: FieldPolicy<any> | FieldReadFunction<any>,
+	special_defense?: FieldPolicy<any> | FieldReadFunction<any>,
+	speed?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type TypeKeySpecifier = ('double_damage_from' | 'double_damage_to' | 'half_damage_from' | 'half_damage_to' | 'id' | 'name' | 'no_damage_from' | 'no_damage_to' | 'pokemon' | TypeKeySpecifier)[];
+export type TypeFieldPolicy = {
+	double_damage_from?: FieldPolicy<any> | FieldReadFunction<any>,
+	double_damage_to?: FieldPolicy<any> | FieldReadFunction<any>,
+	half_damage_from?: FieldPolicy<any> | FieldReadFunction<any>,
+	half_damage_to?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	name?: FieldPolicy<any> | FieldReadFunction<any>,
+	no_damage_from?: FieldPolicy<any> | FieldReadFunction<any>,
+	no_damage_to?: FieldPolicy<any> | FieldReadFunction<any>,
+	pokemon?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type StrictTypedTypePolicies = {
+	Ability: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | AbilityKeySpecifier | (() => undefined | AbilityKeySpecifier),
+		fields?: AbilityFieldPolicy,
+	},
+	DexEntry: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | DexEntryKeySpecifier | (() => undefined | DexEntryKeySpecifier),
+		fields?: DexEntryFieldPolicy,
+	},
+	Dominant_Color: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | Dominant_ColorKeySpecifier | (() => undefined | Dominant_ColorKeySpecifier),
+		fields?: Dominant_ColorFieldPolicy,
+	},
+	EggGroup: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | EggGroupKeySpecifier | (() => undefined | EggGroupKeySpecifier),
+		fields?: EggGroupFieldPolicy,
+	},
+	Game: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | GameKeySpecifier | (() => undefined | GameKeySpecifier),
+		fields?: GameFieldPolicy,
+	},
+	Gender: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | GenderKeySpecifier | (() => undefined | GenderKeySpecifier),
+		fields?: GenderFieldPolicy,
+	},
+	Item: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | ItemKeySpecifier | (() => undefined | ItemKeySpecifier),
+		fields?: ItemFieldPolicy,
+	},
+	Location: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | LocationKeySpecifier | (() => undefined | LocationKeySpecifier),
+		fields?: LocationFieldPolicy,
+	},
+	Move: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | MoveKeySpecifier | (() => undefined | MoveKeySpecifier),
+		fields?: MoveFieldPolicy,
+	},
+	MoveDescription: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | MoveDescriptionKeySpecifier | (() => undefined | MoveDescriptionKeySpecifier),
+		fields?: MoveDescriptionFieldPolicy,
+	},
+	MoveLearnMethod: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | MoveLearnMethodKeySpecifier | (() => undefined | MoveLearnMethodKeySpecifier),
+		fields?: MoveLearnMethodFieldPolicy,
+	},
+	NameAndId: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | NameAndIdKeySpecifier | (() => undefined | NameAndIdKeySpecifier),
+		fields?: NameAndIdFieldPolicy,
+	},
+	OtherEvolutionCriteria: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | OtherEvolutionCriteriaKeySpecifier | (() => undefined | OtherEvolutionCriteriaKeySpecifier),
+		fields?: OtherEvolutionCriteriaFieldPolicy,
+	},
+	Pokemon: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | PokemonKeySpecifier | (() => undefined | PokemonKeySpecifier),
+		fields?: PokemonFieldPolicy,
+	},
+	Query?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | QueryKeySpecifier | (() => undefined | QueryKeySpecifier),
+		fields?: QueryFieldPolicy,
+	},
+	Region: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | RegionKeySpecifier | (() => undefined | RegionKeySpecifier),
+		fields?: RegionFieldPolicy,
+	},
+	Sprites: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | SpritesKeySpecifier | (() => undefined | SpritesKeySpecifier),
+		fields?: SpritesFieldPolicy,
+	},
+	Stats: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | StatsKeySpecifier | (() => undefined | StatsKeySpecifier),
+		fields?: StatsFieldPolicy,
+	},
+	Type: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | TypeKeySpecifier | (() => undefined | TypeKeySpecifier),
+		fields?: TypeFieldPolicy,
+	}
+};
+export type TypedTypePolicies = StrictTypedTypePolicies & TypePolicies;

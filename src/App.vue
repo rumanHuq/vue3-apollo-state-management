@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { useQuery } from "@vue/apollo-composable";
-import { watch } from "vue";
-import { GetAllPokemonQuery, GetAllPokemonQueryVariables } from "./Interfaces/gql-definitions";
+import { GetAllPokemonQuery, GetAllPokemonQueryVariables } from "@/Interfaces/gql-definitions";
 import { ALL_POKEMON } from "./apollo/typeDefs";
 import { useCache, Cache } from "./cache";
+
 const [titleRef, setTitle] = useCache("title");
 const [todosRef, setTodos] = useCache("todos");
 const { result, error, loading } = useQuery<GetAllPokemonQuery, GetAllPokemonQueryVariables>(ALL_POKEMON, { limit: 20 });
@@ -13,10 +13,6 @@ const addTodo = (title: string) => {
     payload: { completed: false, id: todosRef.value.todos.length + 1, title },
   });
 };
-
-watch(result, (newVal, oldVal) => {
-  console.log({ newVal, oldVal });
-});
 </script>
 
 <template>
