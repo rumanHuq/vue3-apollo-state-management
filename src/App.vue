@@ -1,53 +1,38 @@
 <script lang="ts" setup>
-import { useQuery } from "@vue/apollo-composable";
-import { GetAllPokemonQuery, GetAllPokemonQueryVariables } from "@/Interfaces/gql-definitions";
+import { ref } from "vue";
 import { useCache } from "./apollo/cache";
 import type { LocalCache } from "./apollo/cache/types";
-import { ALL_POKEMON } from "./apollo/typeDefs";
-
+import Button from "./components/button.vue";
 const [titleRef, setTitle] = useCache("title");
 const [todosRef, setTodos] = useCache("todos");
-const { result, error, loading } = useQuery<GetAllPokemonQuery, GetAllPokemonQueryVariables>(ALL_POKEMON, { limit: 20 });
-const addTodo = (title: string) => {
-  setTodos<LocalCache["todos"][number]>({
-    actionType: "add",
-    incoming: { completed: false, id: todosRef.value.todos.length + 1, title },
-  });
+const title = ref("");
+const addTodo = () => {
+  if (title.value) {
+    setTodos<LocalCache["todos"][number]>({
+      actionType: "add",
+      incoming: { completed: false, id: new Date().getTime(), title: title.value },
+    });
+    title.value = "";
+  }
 };
 </script>
 
 <template>
   <div>
     <pre>{{ titleRef.title }}</pre>
-    <button @click="() => setTitle({ actionType: 'replaceWith', incoming: 'poop' })">Change</button>
-    <button @click="() => setTitle({ actionType: 'toUpper' })">Upper</button>
+    <Button @click="() => setTitle({ actionType: 'replaceWith', incoming: 'poop' })">Change</Button>
+    <Button @click="() => setTitle({ actionType: 'toUpper' })">Upper</Button>
+    <input v-model="title" type="text" placeholder="...title" />
   </div>
   <div>
-    <pre>{{ loading || error?.message ? "wait..." : result?.allPokemon }}</pre>
-    <ul>
-      <li v-for="(todo, k) in todosRef.todos" :key="k">
+    <ul class="list-none">
+      <li v-for="(todo, k) in todosRef.todos" :key="k" class="border-2 border-l-amber-900 border-dashed">
         <p>{{ todo.id }}</p>
         <p>{{ todo.title }}</p>
         <p>{{ todo.completed }}</p>
+        <Button @click="() => setTodos({ actionType: 'remove', incoming: todo.id })">Remove</Button>
       </li>
     </ul>
-    <button @click="() => addTodo('TBD')">Add</button>
-    <button @click="() => setTodos({ actionType: 'remove', incoming: 2 })">Remove</button>
+    <Button @click="addTodo">Add</Button>
   </div>
 </template>
-
-<style lang="scss">
-ul {
-  list-style: none;
-  padding: 0;
-
-  li {
-    padding: 1rem;
-    width: 400px;
-  }
-
-  li:not(:last-child) {
-    margin-bottom: 2rem;
-  }
-}
-</style>

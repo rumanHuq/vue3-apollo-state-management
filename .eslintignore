@@ -1,4 +1,4 @@
 node_modules
-src/Interfaces/gql-definitions.ts
+src/@types/gql-definitions.ts
 .vscode
 .next

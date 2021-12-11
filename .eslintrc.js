@@ -18,6 +18,7 @@ module.exports = {
     "plugin:prettier/recommended",
   ],
   rules: {
+    "vue/multi-word-component-names": "off",
     "prettier/prettier": "warn",
     "import/no-default-export": "error",
     "import/no-unresolved": "off" /* typescript handles all the import validity */,

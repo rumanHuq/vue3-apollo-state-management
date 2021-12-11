@@ -1,5 +1,5 @@
 import { FieldPolicy, DocumentNode } from "@apollo/client/core";
-import { StrictTypedTypePolicies, TypedTypePolicies } from "@/Interfaces/gql-definitions";
+import { StrictTypedTypePolicies, TypedTypePolicies } from "@/@types/gql-definitions";
 
 export interface Todo {
   completed: boolean;
@@ -21,7 +21,7 @@ type MutationTypes = {
 export type TypeDefs = { [key in LocalCacheKeys]: DocumentNode };
 
 export type Mutations = {
-  [key in LocalCacheKeys]: <T = unknown>(action: { actionType: MutationTypes[key]; incoming?: T }) => void;
+  [key in LocalCacheKeys]: <T>(action: { actionType: MutationTypes[key]; incoming?: T }) => void;
 };
 
 export type LocalCacheFieldPolicies = { [key in LocalCacheKeys]: AppFieldPolicy<LocalCache[key]> };
