@@ -19,6 +19,7 @@ module.exports = {
   ],
   rules: {
     "prettier/prettier": "warn",
+    "import/no-default-export": "error",
     "import/no-unresolved": "off" /* typescript handles all the import validity */,
     "@typescript-eslint/no-unused-vars": "off" /* typescript handles all the import validity */,
     "import/order": [

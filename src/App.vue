@@ -1,16 +1,17 @@
 <script lang="ts" setup>
 import { useQuery } from "@vue/apollo-composable";
 import { GetAllPokemonQuery, GetAllPokemonQueryVariables } from "@/Interfaces/gql-definitions";
+import { useCache } from "./apollo/cache";
+import type { LocalCache } from "./apollo/cache/types";
 import { ALL_POKEMON } from "./apollo/typeDefs";
-import { useCache, Cache } from "./cache";
 
 const [titleRef, setTitle] = useCache("title");
 const [todosRef, setTodos] = useCache("todos");
 const { result, error, loading } = useQuery<GetAllPokemonQuery, GetAllPokemonQueryVariables>(ALL_POKEMON, { limit: 20 });
 const addTodo = (title: string) => {
-  setTodos<Cache["todos"][number]>({
+  setTodos<LocalCache["todos"][number]>({
     actionType: "add",
-    payload: { completed: false, id: todosRef.value.todos.length + 1, title },
+    incoming: { completed: false, id: todosRef.value.todos.length + 1, title },
   });
 };
 </script>
@@ -18,7 +19,7 @@ const addTodo = (title: string) => {
 <template>
   <div>
     <pre>{{ titleRef.title }}</pre>
-    <button @click="() => setTitle({ actionType: 'replaceWith', payload: 'poop' })">Change</button>
+    <button @click="() => setTitle({ actionType: 'replaceWith', incoming: 'poop' })">Change</button>
     <button @click="() => setTitle({ actionType: 'toUpper' })">Upper</button>
   </div>
   <div>
@@ -31,7 +32,7 @@ const addTodo = (title: string) => {
       </li>
     </ul>
     <button @click="() => addTodo('TBD')">Add</button>
-    <button @click="() => setTodos({ actionType: 'remove', payload: 2 })">Remove</button>
+    <button @click="() => setTodos({ actionType: 'remove', incoming: 2 })">Remove</button>
   </div>
 </template>
 
