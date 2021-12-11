@@ -17,16 +17,15 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.5",
-    "@graphql-codegen/typescript-apollo-client-helpers": "^2.1.8",
     "@vue/apollo-composable": "^4.0.0-alpha.16",
     "@vue/apollo-util": "^4.0.0-alpha.16",
     "graphql": "^15.5.3",
     "joi": "^17.5.0",
     "lodash": "^4.17.21",
-    "vue": "^3.2.14",
-    "vue-styled-components": "^1.6.0"
+    "vue": "^3.2.14"
   },
   "devDependencies": {
+    "@graphql-codegen/typescript-apollo-client-helpers": "^2.1.8",
     "@graphql-codegen/cli": "^2.3.0",
     "@graphql-codegen/fragment-matcher": "^3.2.0",
     "@graphql-codegen/introspection": "^2.1.0",
