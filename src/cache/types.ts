@@ -21,7 +21,7 @@ type MutationTypes = {
 export type TypeDefs = { [key in LocalCacheKeys]: DocumentNode };
 
 export type Mutations = {
-  [key in LocalCacheKeys]: <T = unknown>(action: { actionType: MutationTypes[key]; payload?: T }) => void;
+  [key in LocalCacheKeys]: <T = unknown>(action: { actionType: MutationTypes[key]; incoming?: T }) => void;
 };
 
 export type LocalCacheFieldPolicies = { [key in LocalCacheKeys]: AppFieldPolicy<LocalCache[key]> };

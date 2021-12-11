@@ -12,15 +12,15 @@ const TodoSchema = Joi.object<Todo>({
 
 export const mutations: Mutations = {
   title(prop) {
-    const { payload, actionType } = prop;
+    const { incoming, actionType } = prop;
     const query = typeDefs.title;
     cache.updateQuery<LocalCache>({ query }, (data) => {
       if (!data) return data;
       const cache = cloneDeep(data);
       switch (actionType) {
         case "replaceWith": {
-          if (typeof payload !== "string") return data;
-          cache.title = payload;
+          if (typeof incoming !== "string") return data;
+          cache.title = incoming;
           break;
         }
         case "toUpper": {
@@ -34,21 +34,21 @@ export const mutations: Mutations = {
     });
   },
   todos(prop) {
-    const { payload, actionType } = prop;
+    const { incoming, actionType } = prop;
     const query = typeDefs.todos;
     cache.updateQuery<LocalCache>({ query }, (data) => {
       if (!data) return data;
       const cache = cloneDeep(data);
       switch (actionType) {
         case "add": {
-          const { error, value } = TodoSchema.validate(payload);
+          const { error, value } = TodoSchema.validate(incoming);
           if (error) throw error;
           if (!value) return cache;
           cache.todos.push(value);
           return cache;
         }
         case "remove": {
-          const { error, value }: ValidationResult<number> = Joi.number().required().validate(payload);
+          const { error, value }: ValidationResult<number> = Joi.number().required().validate(incoming);
           if (error) throw error;
 
           cache.todos = cache.todos.filter((todo) => todo.id !== value);
