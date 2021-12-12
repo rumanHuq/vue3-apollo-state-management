@@ -8,20 +8,20 @@ export interface Todo {
 }
 export interface LocalCache {
   todos: Todo[];
-  title: string;
+  queue: number[];
 }
 export type LocalCacheKeys = keyof LocalCache;
 
 type AppFieldPolicy<T> = FieldPolicy<Readonly<T>, Readonly<T>>;
 type MutationTypes = {
   todos: "add" | "remove";
-  title: "replaceWith" | "toUpper";
+  queue: "enqueue" | "dequeue";
 };
 
 export type TypeDefs = { [key in LocalCacheKeys]: DocumentNode };
 
 export type Mutations = {
-  [key in LocalCacheKeys]: <T>(action: { actionType: MutationTypes[key]; incoming?: T }) => void;
+  [key in LocalCacheKeys]: <T>(action: { actionType: MutationTypes[key]; data?: T }) => void;
 };
 
 export type LocalCacheFieldPolicies = { [key in LocalCacheKeys]: AppFieldPolicy<LocalCache[key]> };

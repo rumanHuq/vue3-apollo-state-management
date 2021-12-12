@@ -12,12 +12,14 @@ const typePolicies: Partial<AppPolicies> = {
       todos: {
         read: (val) => val ?? [],
       },
-      title: { read: (newVal) => newVal ?? "" },
+      queue: {
+        read: (val) => val ?? [],
+      },
     },
   },
 };
 
-export const cache = new InMemoryCache({ typePolicies });
+export const apolloCache = new InMemoryCache({ typePolicies });
 
 export function useCache<CacheKey extends LocalCacheKeys>(cacheKey: CacheKey) {
   type ApolloResult = Record<CacheKey, LocalCache[CacheKey]>;

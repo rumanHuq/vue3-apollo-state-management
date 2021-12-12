@@ -2,11 +2,11 @@ import "./index.css";
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import { createApp, provide, h } from "vue";
 import App from "./App.vue";
-import { client } from "./apollo";
+import { apolloClient } from "./apollo";
 
-createApp({
-  setup() {
-    provide(DefaultApolloClient, client);
-  },
+const app = createApp({
+  setup: () => provide(DefaultApolloClient, apolloClient),
   render: () => h(App),
-}).mount("#app");
+});
+
+app.mount("#app");

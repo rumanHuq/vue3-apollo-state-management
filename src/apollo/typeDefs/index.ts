@@ -7,15 +7,31 @@ type TypeDefs = {
 };
 
 const typeDefs: TypeDefs = {
-  allPokemon: gql`
-    query getAllPokemon($limit: Int!) {
-      allPokemon(limit: $limit) {
-        sprites {
-          back_default
+  Crafts: gql`
+    query getCrafts {
+      Crafts {
+        edges {
+          id
+          name
         }
       }
     }
   `,
+  Craft: gql`
+    query getCraft {
+      Craft {
+        id
+        name
+        type
+        brand
+        price
+        age
+        owner {
+          id
+        }
+      }
+    }
+  `
 };
 
 export function getTypeDef(queryName: TypeDefsKeys) {

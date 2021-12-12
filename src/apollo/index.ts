@@ -1,5 +1,5 @@
-import { createHttpLink, ApolloClient } from "@apollo/client/core";
-import { cache } from "./cache";
-const httpLink = createHttpLink({ uri: "https://dex-server.herokuapp.com/" });
+import { ApolloClient } from "@apollo/client/core";
+import { apolloCache } from "./cache";
+import { link } from "./link";
 
-export const client = new ApolloClient({ link: httpLink, cache });
+export const apolloClient = new ApolloClient({ link, cache: apolloCache });

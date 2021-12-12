@@ -8,9 +8,9 @@ export const typeDefs: TypeDefs = {
       todos
     }
   `,
-  title: gql`
-    query getTitle {
-      title
+  queue: gql`
+    query getQueue {
+      queue
     }
   `,
 };
